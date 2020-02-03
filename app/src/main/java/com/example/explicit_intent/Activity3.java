@@ -30,9 +30,10 @@ public class Activity3 extends AppCompatActivity {
                 }
                 else{
                     String surname = ETsur.getText().toString();
-                    Intent intent = new Intent(Activity3.this, com.example.explicit_intent.MainActivity.class);
+                    Intent intent = new Intent();
                     intent.putExtra("surname", surname);
-                    startActivity(intent);
+                    setResult(RESULT_OK,intent);
+                    Activity3.this.finish();
                 }
             }
         });

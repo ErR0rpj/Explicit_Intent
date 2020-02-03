@@ -1,5 +1,6 @@
 package com.example.explicit_intent;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,11 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+// NExt task in this is to get the data from TV to activity 3 retained. Try the app then u will get what am i saying.
     EditText ETName;
     Button BTNAct2,BTNAct3;
     TextView TVResult;
-    final int Resultfrom3=3;
+    final int RESULTFROM3=3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(MainActivity.this,com.example.explicit_intent.Activity3.class);
-                startActivityForResult(intent, Resultfrom3);
-
+                startActivityForResult(intent, RESULTFROM3);
             }
         });
 
-        String surname=getIntent().getStringExtra("surname");
-        TVResult.setText(surname);
+        /*String surname=getIntent().getStringExtra("surname");
+        TVResult.setText(surname);*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==RESULTFROM3){
+            if(resultCode==RESULT_OK){
+                TVResult.setText(data.getStringExtra("surname"));
+            }
+
+            if(resultCode==RESULT_CANCELED){
+                TVResult.setText("Suranem show krunga daloge to");
+            }
+        }
     }
 }
